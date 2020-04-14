@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import static com.exhibition.controller.util.Constants.*;
-
 public class Servlet extends HttpServlet {
 
     //TODO delete after tests
@@ -28,29 +26,29 @@ public class Servlet extends HttpServlet {
         ExhibitionService exhibitionService = new ExhibitionService();
 
         servletConfig.getServletContext()
-                .setAttribute(LOGGED_USERS, new HashSet<String>());
+                .setAttribute("loggedUsers", new HashSet<String>());
 
-        commands.put(URL_INDEX, new IndexCommand());
-        commands.put(URL_LOGIN, new LoginCommand(userService));
-        commands.put(URL_REGISTRATION, new RegistrationCommand(userService));
-        commands.put(URL_LOGOUT, new LogOutCommand());
-        commands.put(URL_SERVER_ERROR, new ServerErrorCommand());
+        commands.put("index", new IndexCommand());
+        commands.put("login", new LoginCommand(userService));
+        commands.put("registration", new RegistrationCommand(userService));
+        commands.put("logout", new LogOutCommand());
+        commands.put("server-error", new ServerErrorCommand());
 
-        commands.put(URL_SUPER_ADMIN, new SuperAdminCommand());
-        commands.put(URL_USER_LIST, new UserListCommand(userService));
-        commands.put(URL_EDIT, new UserEditCommand(userService));
+        commands.put("super_admin", new SuperAdminCommand());
+        commands.put("super_admin/user-list", new UserListCommand(userService));
+        commands.put("super_admin/edit", new UserEditCommand(userService));
 
-        commands.put(URL_ADMIN, new AdminCommand());
-        commands.put(URL_EXHIBITION_ADD, new ExhibitionAddCommand(exhibitionService));
-        commands.put(URL_EXHIBITION_EDIT, new ExhibitionEditCommand(exhibitionService));
-        commands.put(URL_MY_EXHIBITIONS, new MyExhibitionsCommand(exhibitionService));
+        commands.put("admin", new AdminCommand());
+        commands.put("admin/exhibitions/add", new ExhibitionAddCommand(exhibitionService));
+        commands.put("admin/exhibitions/edit", new ExhibitionEditCommand(exhibitionService));
+        commands.put("admin/my_exhibitions", new MyExhibitionsCommand(exhibitionService));
 
-        commands.put(URL_USER, new UserCommand());
-        commands.put(URL_EXHIBITIONS, new ExhibitionPageCommand(exhibitionService));
-        commands.put(URL_EDIT_PROFILE, new EditProfileCommand(userService));
-        commands.put(URL_BUY_TICKET, new BuyTicketCommand(exhibitionService, userService));
-        commands.put(URL_BOUGHT_TICKETS, new BoughtTicketsCommand(exhibitionService, userService));
-        commands.put(URL_ADD_MONEY, new AddMoneyCommand(userService));
+        commands.put("user", new UserCommand());
+        commands.put("user/exhibitions", new ExhibitionPageCommand(exhibitionService));
+        commands.put("user/edit-profile", new EditProfileCommand(userService));
+        commands.put("user/buy-ticket", new BuyTicketCommand(exhibitionService, userService));
+        commands.put("user/bought-tickets", new BoughtTicketsCommand(exhibitionService, userService));
+        commands.put("user/add-money", new AddMoneyCommand(userService));
     }
 
     @Override
@@ -76,7 +74,7 @@ public class Servlet extends HttpServlet {
             String path = request.getRequestURI();
             path = path.replaceAll(".*/exhibition/", "");
 
-            Command command = commands.getOrDefault(path, (r) -> PAGE_ERROR_404);
+            Command command = commands.getOrDefault(path, (r) -> "/WEB-INF/error404.jsp");
 
             String page = command.execute(request);
             if (page.contains("redirect")) {
@@ -87,7 +85,7 @@ public class Servlet extends HttpServlet {
 
         } catch (Exception e) {
 
-            response.sendRedirect("/exhibition/" + URL_SERVER_ERROR);
+            response.sendRedirect("/exhibition/server-error");
         }
     }
 }
