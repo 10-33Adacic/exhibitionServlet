@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <!-- Console -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%p] %d{HH:mm:ss} (%F:%L) --- %m %n"/>
+        </Console>
+
+        <!-- File -->
+        <File name="File" immediateFlush="true" append="true"
+              fileName="C:\Users\Templar\IdeaProjects\exhibitionServlet\target\exhibition.log">
+            <PatternLayout pattern="[%p] %d{hh:mm:ss} (%F:%L) --- %m %n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
