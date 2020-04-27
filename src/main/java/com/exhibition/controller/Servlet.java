@@ -16,9 +16,6 @@ import java.util.Map;
 
 public class Servlet extends HttpServlet {
 
-    //TODO delete after tests
-//    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
-
     private Map<String, Command> commands = new HashMap<>();
 
     public void init(ServletConfig servletConfig) {
