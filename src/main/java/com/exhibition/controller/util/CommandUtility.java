@@ -53,7 +53,7 @@ public class CommandUtility {
         }
 
         List<Exhibition> exhibitions =
-                eService.findDiapason((page - 1) * recordsPerPage,
+                eService.findRange((page - 1) * recordsPerPage,
                         recordsPerPage);
 
         request.setAttribute("exhibitionList", exhibitions);

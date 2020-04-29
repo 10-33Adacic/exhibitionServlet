@@ -17,5 +17,5 @@ public interface ExhibitionDao extends GenericDao<Exhibition> {
 
     int countOfRecords();
 
-    List<Exhibition> findDiapason(int from, int to);
+    List<Exhibition> findRange(int from, int to);
 }

@@ -151,12 +151,12 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
     }
 
     @Override
-    public List<Exhibition> findDiapason(int from, int count) {
+    public List<Exhibition> findRange(int from, int count) {
         List<Exhibition> resultList = new CopyOnWriteArrayList<>();
 
         try(PreparedStatement ps =
                     connection.prepareStatement(
-                            QUERY_FIND_DIAPASON)
+                            QUERY_FIND_RANGE)
         ){
             ps.setInt(1, from);
             ps.setInt(2, count);
@@ -167,7 +167,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
                 resultList.add(ex);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("QUERY_FIND_DIAPASON");
+            throw new RuntimeException("QUERY_FIND_RANGE");
         }
 
         if (!resultList.isEmpty()) {
@@ -296,7 +296,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             "SELECT id, name, showroom, description, author, price, date FROM exhibition INNER JOIN ticket ON id = ticket_id AND user_id = ? ORDER BY id DESC";
     private static final String  QUERY_COUNT_OF_RECORDS =
             "SELECT COUNT(*) FROM exhibition";
-    private static final String QUERY_FIND_DIAPASON =
+    private static final String QUERY_FIND_RANGE =
             "SELECT * FROM exhibition ORDER BY id DESC LIMIT ?, ?";
     private static final String QUERY_EXHIBITION_FIND_BY_NAME =
             "SELECT * FROM exhibition WHERE name = ?";

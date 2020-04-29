@@ -59,9 +59,9 @@ public class ExhibitionService {
         }
     }
 
-    public List<Exhibition> findDiapason(int from, int count) {
+    public List<Exhibition> findRange(int from, int count) {
         try (ExhibitionDao exhibitionDao = daoFactory.createExhibitionDao()) {
-            return exhibitionDao.findDiapason(from, count);
+            return exhibitionDao.findRange(from, count);
         }
     }
 }
