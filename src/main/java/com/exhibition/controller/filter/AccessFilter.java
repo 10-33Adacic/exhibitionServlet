@@ -33,7 +33,10 @@ public class AccessFilter extends AbstractFilter {
                 response.sendRedirect("/exhibition/index");
             }
         }  else if (path.contains("user")) {
-            if (request.getSession().getAttribute("role") == Role.ADMIN ||
+            //TODO разобраться нахрена проверка на admin?
+            if (
+                    request.getSession().getAttribute("role") == Role.ADMIN
+                            ||
                     request.getSession().getAttribute("role") == Role.USER) {
                 chain.doFilter(request, response);
             } else {
