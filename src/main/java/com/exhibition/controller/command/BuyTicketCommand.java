@@ -10,6 +10,7 @@ import java.util.List;
 
 public class BuyTicketCommand implements Command {
 
+    //TODO fix constants
     private static final String HAVE_TICKET = "haveTicket";
 
     private static final String HAVE_TICKET_ERROR = "You have already bought this ticket.";
