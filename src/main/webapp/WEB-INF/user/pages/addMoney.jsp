@@ -42,9 +42,9 @@
         <form action="${pageContext.request.contextPath}/exhibition/user/add-money"
               method="post" class="form-group mt-4">
             <label for="money"><b>Replenish balance</b></label>
-            <input type="text" name="money" placeholder="0" autofocus
+            <input type="text" name="money" placeholder="1-9999" autofocus
                    required id="money" class="form-control col-sm-3 mt-1"
-                   pattern="[1-9]{1}|^[1-9]{1}[0-9]{1}|^[1-9]{1}[0-9]{1}[0-9]{1}|^1000">
+                   pattern="[1-9]{1}|^[1-9]{1}[0-9]{1}|^[1-9]{1}[0-9]{2}|^[1-9]{1}[0-9]{3}">
             <button class="btn btn-primary mt-2" type="submit">
                 <fmt:message key="button.add"/>
             </button>
