@@ -1,5 +1,6 @@
 package com.exhibition.model.entity;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class User {
@@ -10,7 +11,7 @@ public class User {
 
     private String password;
 
-    private Long accountMoney;
+    private BigDecimal accountMoney;
 
     private boolean active;
 
@@ -39,7 +40,7 @@ public class User {
             return this;
         }
 
-        public Builder accountMoney(Long accountMoney) {
+        public Builder accountMoney(BigDecimal accountMoney) {
             User.this.accountMoney = accountMoney;
             return this;
         }
@@ -83,11 +84,11 @@ public class User {
         this.password = password;
     }
 
-    public Long getAccountMoney() {
+    public BigDecimal getAccountMoney() {
         return accountMoney;
     }
 
-    public void setAccountMoney(Long accountMoney) {
+    public void setAccountMoney(BigDecimal accountMoney) {
         this.accountMoney = accountMoney;
     }
 

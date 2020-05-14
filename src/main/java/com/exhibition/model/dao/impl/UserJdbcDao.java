@@ -5,6 +5,7 @@ import com.exhibition.model.dao.mapper.UserMapper;
 import com.exhibition.model.entity.Exhibition;
 import com.exhibition.model.entity.User;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -30,7 +31,7 @@ public class UserJdbcDao implements UserDao {
             ps.setString(2, entity.getPassword());
             ps.setString(3, entity.getRole().name());
             ps.setBoolean(4, entity.isActive());
-            ps.setLong(5, entity.getAccountMoney());
+            ps.setBigDecimal(5, entity.getAccountMoney());
 
             ps.executeUpdate();
         }
@@ -68,7 +69,7 @@ public class UserJdbcDao implements UserDao {
         ) {
             connection.setAutoCommit(false);
 
-            updateBalance.setLong(1, user.getAccountMoney() - exhibition.getPrice());
+            updateBalance.setBigDecimal(1, user.getAccountMoney().subtract(exhibition.getPrice()));
             updateBalance.setLong(2, user.getId());
             updateBalance.execute();
 
@@ -89,12 +90,12 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
-    public void updateBalance(User user, Long value) {
+    public void updateBalance(User user, BigDecimal value) {
         try (PreparedStatement ps =
                      connection.prepareStatement(
                              QUERY_USER_UPDATE_BALANCE)
         ) {
-            ps.setLong(1, value);
+            ps.setBigDecimal(1, value);
             ps.setLong(2, user.getId());
             ps.executeUpdate();
 
@@ -151,7 +152,7 @@ public class UserJdbcDao implements UserDao {
             ps.setString(2, entity.getPassword());
             ps.setString(3, entity.getRole().name());
             ps.setBoolean(4, entity.isActive());
-            ps.setLong(5, entity.getAccountMoney());
+            ps.setBigDecimal(5, entity.getAccountMoney());
             ps.setLong(6, entity.getId());
 
             ps.executeUpdate();

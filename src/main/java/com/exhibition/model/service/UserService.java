@@ -7,6 +7,7 @@ import com.exhibition.model.entity.Exhibition;
 import com.exhibition.model.entity.Role;
 import com.exhibition.model.entity.User;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class UserService {
                 .password(password)
                 .role(Role.USER)
                 .active(true)
-                .accountMoney(0L)
+                .accountMoney(BigDecimal.valueOf(0))
                 .build();
 
         try (UserDao userDao = daoFactory.createUserDao()) {
@@ -57,7 +58,7 @@ public class UserService {
         }
     }
 
-    public void updateBalance(User user, Long value) {
+    public void updateBalance(User user, BigDecimal value) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             userDao.updateBalance(user, value);
         }
@@ -68,10 +69,10 @@ public class UserService {
              UserDao userDao = daoFactory.createUserDao()
         ) {
             Exhibition exhibition = exhibitionDao.findById(ticketId);
-            Long userMoney = user.getAccountMoney();
-            Long ticketPrice = exhibition.getPrice();
+            BigDecimal userMoney = user.getAccountMoney();
+            BigDecimal ticketPrice = exhibition.getPrice();
 
-            if (userMoney >= ticketPrice) {
+            if (userMoney.compareTo(ticketPrice) != -1) {
                 userDao.buyTicket(user, exhibition);
             } else {
                 throw new RuntimeException("Not enough money");

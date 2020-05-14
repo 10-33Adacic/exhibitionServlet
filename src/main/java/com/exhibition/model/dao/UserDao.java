@@ -3,6 +3,7 @@ package com.exhibition.model.dao;
 import com.exhibition.model.entity.Exhibition;
 import com.exhibition.model.entity.User;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 public interface UserDao extends GenericDao<User> {
@@ -11,5 +12,5 @@ public interface UserDao extends GenericDao<User> {
 
     void buyTicket(User user, Exhibition exhibition) throws SQLException;
 
-    void updateBalance(User user, Long value);
+    void updateBalance(User user, BigDecimal value);
 }

@@ -18,7 +18,7 @@ public class ExhibitionMapper {
                 .showroom(rs.getString("showroom"))
                 .description(rs.getString("description"))
                 .author(userService.findById(rs.getLong("author")))
-                .price(rs.getLong("price"))
+                .price(rs.getBigDecimal("price"))
                 .date(Date.valueOf(rs.getString("date")))
                 .build();
     }

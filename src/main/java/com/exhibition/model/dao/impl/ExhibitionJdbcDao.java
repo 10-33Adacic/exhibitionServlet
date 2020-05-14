@@ -30,7 +30,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             ps.setString(2, entity.getShowroom());
             ps.setString(3, entity.getDescription());
             ps.setLong(4, entity.getAuthor().getId());
-            ps.setLong(5, entity.getPrice());
+            ps.setBigDecimal(5, entity.getPrice());
             ps.setString(6, entity.getDate().toString());
 
             ps.executeUpdate();
@@ -231,7 +231,7 @@ public class ExhibitionJdbcDao implements ExhibitionDao {
             ps.setString(2, entity.getShowroom());
             ps.setString(3, entity.getDescription());
             ps.setLong(4, entity.getAuthor().getId());
-            ps.setLong(5, entity.getPrice());
+            ps.setBigDecimal(5, entity.getPrice());
             ps.setString(6, entity.getDate().toString());
             ps.setLong(7, entity.getId());
 

@@ -1,5 +1,6 @@
 package com.exhibition.model.entity;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class Exhibition {
 
     private User author;
 
-    private Long price;
+    private BigDecimal price;
 
     private Date date;
 
@@ -52,7 +53,7 @@ public class Exhibition {
             return this;
         }
 
-        public Exhibition.Builder price(Long price) {
+        public Exhibition.Builder price(BigDecimal price) {
             Exhibition.this.price = price;
             return this;
         }
@@ -107,11 +108,11 @@ public class Exhibition {
         this.author = author;
     }
 
-    public Long getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

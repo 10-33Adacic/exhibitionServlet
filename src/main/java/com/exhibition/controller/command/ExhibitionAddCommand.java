@@ -6,6 +6,7 @@ import com.exhibition.model.entity.User;
 import com.exhibition.model.service.ExhibitionService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 public class ExhibitionAddCommand implements Command {
@@ -30,7 +31,7 @@ public class ExhibitionAddCommand implements Command {
             String dateStr = request.getParameter("date");
 
             if (CommandUtility.correctInput(name, showroom, description, priceStr, dateStr)) {
-                Long price = Long.valueOf(priceStr);
+                BigDecimal price = new BigDecimal(priceStr);
                 Date date = Date.valueOf(dateStr);
 
                 if (CommandUtility.dataBeforeToday(date)) {

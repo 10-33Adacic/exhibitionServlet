@@ -5,6 +5,7 @@ import com.exhibition.model.entity.User;
 import com.exhibition.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 
 public class AddMoneyCommand implements Command {
 
@@ -21,10 +22,10 @@ public class AddMoneyCommand implements Command {
         request.setAttribute("currentUser", user);
 
         String moneyString = request.getParameter("money");
-        Long accountMoney = user.getAccountMoney();
+        BigDecimal accountMoney = user.getAccountMoney();
         if (moneyString != null) {
-            Long money = Long.valueOf(moneyString);
-            Long value = accountMoney + money;
+            BigDecimal money = new BigDecimal(moneyString);
+            BigDecimal value = accountMoney.add(money);
             userService.updateBalance(user, value);
 
             CommandUtility.setUser(request, user);

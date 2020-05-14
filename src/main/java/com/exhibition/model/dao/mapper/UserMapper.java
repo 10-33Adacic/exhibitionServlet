@@ -15,7 +15,7 @@ public class UserMapper {
                 .password(rs.getString("password"))
                 .role(Role.valueOf(rs.getString("role")))
                 .active(rs.getBoolean("active"))
-                .accountMoney(rs.getLong("account_money"))
+                .accountMoney(rs.getBigDecimal("account_money"))
                 .build();
     }
 }
