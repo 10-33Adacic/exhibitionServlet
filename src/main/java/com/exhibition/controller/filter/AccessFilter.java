@@ -1,14 +1,11 @@
 package com.exhibition.controller.filter;
 
-
 import com.exhibition.model.entity.Role;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-//import static com.exhibition.controller.util.Constants.URL_INDEX;
 
 public class AccessFilter extends AbstractFilter {
 
