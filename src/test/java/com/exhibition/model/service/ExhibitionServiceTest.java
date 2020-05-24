@@ -119,32 +119,6 @@ public class ExhibitionServiceTest {
     }
 
     @Test
-    public void update() {
-        final String name = "name3";
-        final User user = User.builder().id(1L).build();
-        final Date date = new Date(0);
-        final Exhibition exhibition = Exhibition.builder()
-                .name(name)
-                .showroom("")
-                .description("")
-                .author(user)
-                .price(BigDecimal.ZERO)
-                .date(date)
-                .build();
-
-        exhibitionDao.add(exhibition);
-
-        Exhibition actual = exhibitionDao.findByName(name);
-        actual.setPrice(BigDecimal.valueOf(100));
-
-        exhibitionDao.update(actual);
-
-        Exhibition expected = exhibitionDao.findByName(name);
-
-        Assert.assertEquals(actual.getPrice(), expected.getPrice());
-    }
-
-    @Test
     public void findByShowroom() {
         final String showroom = "showroom";
         final User user = User.builder().id(1L).build();

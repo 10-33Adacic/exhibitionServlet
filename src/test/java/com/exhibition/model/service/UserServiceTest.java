@@ -88,29 +88,6 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateBalance() {
-        final String u = "user2";
-        final String p = "";
-        final User user = User.builder()
-                .username(u)
-                .password(p)
-                .role(Role.USER)
-                .active(true)
-                .accountMoney(BigDecimal.ZERO)
-                .build();
-
-        userDao.add(user);
-
-        User tmp = userDao.findByUsernameAndPassword(u, p);
-        userDao.updateBalance(tmp, BigDecimal.valueOf(100));
-        User expected = userDao.findByUsernameAndPassword(u, p);
-
-        userDao.delete(expected.getId());
-
-        Assert.assertSame(BigDecimal.valueOf(100), expected.getAccountMoney());
-    }
-
-    @Test
     public void findUser() {
         final String u = "user3";
         final String p = "";
