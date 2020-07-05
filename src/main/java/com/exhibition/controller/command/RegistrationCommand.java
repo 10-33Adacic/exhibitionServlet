@@ -17,8 +17,19 @@ public class RegistrationCommand implements Command {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if (username == null || password == null)
+        if (username == null
+                || username.equals("")
+                || password == null
+                || password.equals(""))
             return "/registration.jsp";
+        try {
+            if (userService.findByUsername(username).isPresent()) {
+                request.setAttribute("error", true);
+                return "/registration.jsp";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         userService.addUser(username, password);
 

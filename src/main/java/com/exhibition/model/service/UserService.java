@@ -46,6 +46,15 @@ public class UserService {
         }
     }
 
+    public Optional<User> findByUsername(String username){
+        try (UserDao userDao = daoFactory.createUserDao()) {
+            Optional<User> user =
+                    Optional.ofNullable(
+                            userDao.findByUsername(username));
+            return user;
+        }
+    }
+
     public User findById(Long editId) {
         try (UserDao userDao = daoFactory.createUserDao()) {
             return userDao.findById(editId);

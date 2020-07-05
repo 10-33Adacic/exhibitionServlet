@@ -124,6 +124,25 @@ public class UserJdbcDao implements UserDao {
     }
 
     @Override
+    public User findByUsername(String username) {
+        try (PreparedStatement ps =
+                     connection.prepareStatement(
+                             QUERY_USER_FIND_BY_NAME)
+        ) {
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapper.extractFromResultSet(rs);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    @Override
     public List<User> findAll() {
         List<User> resultList = new CopyOnWriteArrayList<>();
 
@@ -204,6 +223,8 @@ public class UserJdbcDao implements UserDao {
             "SELECT * FROM user WHERE username = ? AND password = ?";
     private static final String QUERY_USER_FIND_BY_ID =
             "SELECT * FROM user WHERE id = ?";
+    private static final String QUERY_USER_FIND_BY_NAME =
+            "SELECT * FROM user WHERE username = ?";
     private static final String QUERY_USER_FIND_ALL =
             "SELECT * FROM user";
     private static final String QUERY_USER_UPDATE =
